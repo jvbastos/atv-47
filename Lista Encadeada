@@ -1,0 +1,154 @@
+# inclui <stdio.h>
+# inclui <string.h>
+
+
+
+    struct Não {
+    char valor;
+    No *próximo, * anterior;
+
+    Não(car valor) {
+        este->valor = valor;
+        próximo = NULL;
+        anterior = NULO;
+    }
+};
+
+    lista de classe {
+    privado:
+    No *cabeca, * cauda, ​​*cursor;
+    int n;
+
+    público:
+    Lista() {
+        cabeça = NULL;
+        cauda = NULO;
+        cursor = NULO;
+        n = 0;
+    }
+
+    bool vazio() {
+        return cabeca == NULL;
+    }
+
+    void inserirInicio(char valor) {
+        Não *novo = novo Não(valor);
+        if (vázia()) {
+            cabeça = novo;
+            cauda = novo;
+        } outro {
+            novo->próximo = cabeça;
+            cabeça = novo;
+        }
+        cursor = cabeça;
+        n++;
+    }
+
+    void inserirFinal(char valor) {
+        Não *novo = novo Não(valor);
+        if (vázia()) {
+            cabeça = novo;
+            cauda = novo;
+        } outro {
+            cauda->próximo = novo;
+            cauda = novo;
+        }
+        n++;
+    }
+
+    void insiraCursor(char valor) {
+        Não *novo = novo Não(valor);
+        if (vázia()) {
+            cabeça = novo;
+            cauda = novo;
+        } outro {
+            novo->próximo = cursor->próximo;
+            cursor->próximo = novo;
+        }
+        cursor = novo;
+        if (cursor->próximo == NULL) cauda = cursor;
+        n++;
+    }
+
+    bool existeElemento(char elemento) {
+        Não *atual = cabeça;
+        while (atual != NULL) {
+            if (atual->valor == elemento) {
+                retornar verdadeiro;
+            }
+            atual = atual->próximo;
+        }
+        retorna falso;
+    }
+
+    void removeElemento(char elemento) {
+        Não *atual = cabeça;
+        while (atual != NULL) {
+            if (atual->valor == elemento) {
+                if (atual == cabeca) {
+                    cabeca = atual->proximo;
+                    if (cabeca != NULL) cabeca->anterior = NULL;
+                } outro {
+                    atual->anterior->próximo = atual->próximo;
+                    if (atual == cauda) {
+                        cauda = atual->anterior;
+                    } outro {
+                        atual->próximo->anterior = atual->anterior;
+                    }
+                }
+                Não *tmp = atual;
+                atual = atual->próximo;
+                excluir tmp;
+                n++;
+            } outro {
+                atual = atual->próximo;
+            }
+        }
+    }
+
+
+
+
+
+
+    intsize() {
+        retornar n;
+    }
+
+    void imprimir() {
+        Não *aux = cabeça;
+        while (aux != NULL) {
+            printf("%c", aux->valor);
+            aux = aux->próximo;
+        }
+        printf(" \n ");
+    }
+
+};
+
+int principal() {
+
+    char tmp[100001];
+    while (scanf("%s", tmp) != EOF) {
+        Lista l;
+        chave int = 1; // 1= final 2= inicio 3= cursor
+        for (int i = 0; tmp[i] != ' \0 '; i++) {
+            if (tmp[i] == '[') {
+                chave = 2;
+            } else if (tmp[i] == ']') {
+                chave = 1;
+            } outro {
+                if (chave == 1) {
+                    l.inserirFinal(tmp[i]);
+                } else if (chave == 2) {
+                    l.inserirInicio(tmp[i]);
+                    chave = 3;
+                } else if (chave == 3) {
+                    l.inserirCursor(tmp[i]);
+                }
+            }
+        }
+        l.imprimir();
+    }
+    retorna 0;
+}
